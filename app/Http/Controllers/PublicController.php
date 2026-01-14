@@ -69,4 +69,33 @@ class PublicController extends Controller
         ]);
         return redirect(route("home"))->with("status", "Film caricato correttamente!");
     }
+    public function show(Libro $libro){ 
+        //Pagina di dettaglio
+        return view("libri.detail", compact("libro"));
+    }
+    public function edit(Libro $libro)
+    {
+        //Accedere alla pagina che contiene il form per l'update
+        return view("libri.edit", compact("libro"));
+    }
+    public function update(Request $request, Libro $libro)
+    {
+        
+        $libro->update([
+            // aggiungere le chiavi del create
+            "title" => $request->title,
+            "author" => $request->author,
+            "year" => $request->year,
+            "info" => $request->info,
+        ]);
+
+        return redirect(route("libro_show", compact("libro"))); //ricordarsi della action sul form x richiamare la rotta e sul form lasciare method post e dopo csrf scrivere:@method("put")
+    }
+    public function destroy(Libro $libro)
+    {
+        //cancellare i record
+        $libro->delete();
+        return redirect(route("libri")); //aggiungere su index un form action con un button per cancellare e aggiungere la route e csrf e poi @method("delete")
+    }
+
 }

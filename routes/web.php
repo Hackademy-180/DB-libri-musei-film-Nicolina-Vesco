@@ -16,4 +16,13 @@ Route::get("/movies", [PublicController::class, "movies"])->name("movies");
 Route::get("/movies/create-movies", [PublicController::class, "create_movies"])->name("create_movies");
 Route::post("/movie/add", [PublicController::class, "add_movie"])->name("add_movie");
 
+Route::get("/libro/detail/{libro}", [PublicController::class, "show"])->name("libro_show");
+Route::get("/libri/edit/{libro}", [PublicController::class, "edit"])->name("libro_edit");
+Route::put("/libro/update/{libro}", [PublicController::class, "update"])->name("libro_update");
+Route::delete("/libro/destroy/{libro}", [PublicController::class, "destroy"])->name("libro_destroy");
+
+
+
+
+
 
