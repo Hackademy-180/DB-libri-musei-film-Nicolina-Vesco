@@ -17,9 +17,13 @@
                  <p class="lead">
                     <strong>Contenuto:</strong> {{$libro->info}}
                 </p>
-                <a href="{{route("libro_edit", compact("libro"))}}" class="btn btn-primary">Modifica libro</a>
-                <a href="{{route("libri")}}" class="btn btn-primary">Torna a tutti i libri</a>
-
+                <p class="lead">
+                    <strong>Creato da:</strong> {{$libro->user->name}}
+                </p>
+                    @if(Auth::id()==$libro->user->id)
+                        <a href="{{route("libro_edit", compact("libro"))}}" class="btn btn-primary">Modifica libro</a>
+                        <a href="{{route("libri")}}" class="btn btn-primary">Torna a tutti i libri</a>
+                    @endif
             </article>
         </sectiom>
     </main>

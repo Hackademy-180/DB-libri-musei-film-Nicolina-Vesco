@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use App\Models\Libro;
@@ -38,6 +39,7 @@ class PublicController extends Controller
             "author" => $request->author,
             "year" => $request->year,
             "info" => $request->info,
+            "user_id"=> Auth::user()->id
 
         ]);
         return redirect(route("home"))->with("status", "Libro caricato correttamente!");
@@ -48,6 +50,7 @@ class PublicController extends Controller
             "country" => $request->country,
             "year" => $request->year,
             "info" => $request->info,
+            "user_id"=> Auth::user()->id,
 
         ]);
         return redirect(route("home"))->with("status", "Museo aggiornato correttamente!");
@@ -66,6 +69,7 @@ class PublicController extends Controller
             "director" => $request->director,
             "year" => $request->year,
             "info" => $request->info,
+            "user_id"=> Auth::user()->id,
         ]);
         return redirect(route("home"))->with("status", "Film caricato correttamente!");
     }
@@ -97,5 +101,28 @@ class PublicController extends Controller
         $libro->delete();
         return redirect(route("libri")); //aggiungere su index un form action con un button per cancellare e aggiungere la route e csrf e poi @method("delete")
     }
+
+        // Musei
+    public function showMuseo(Museo $museo){
+        return view("musei.detail", compact("museo"));
+    }
+    public function editMuseo(Museo $museo){
+        return view("musei.edit", compact("museo"));
+    }
+    public function updateMuseo(Request $request, Museo $museo){
+
+        $museo->update([
+             "name" => $request->name,
+            "country" => $request->country,
+            "year" => $request->year,
+            "info" => $request->info,
+        ]);
+        return redirect(route("museo_show", compact("museo")));
+    }
+    public function destroyMuseo(Museo $museo){
+        $museo->delete();
+        return redirect(route("musei"));
+    }
+
 
 }
