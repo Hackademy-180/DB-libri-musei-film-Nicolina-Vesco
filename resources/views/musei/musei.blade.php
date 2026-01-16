@@ -8,13 +8,13 @@
                       <h5 class="card-title">{{$museo->name}}</h5>
                         <div class="card-body d-flex align-items-center gap-3">
                             <a href="{{route('museo_show', compact('museo'))}}" class="btn btn-primary">Visualizza dettaglio</a>
-                            
-                            <form action="{{route('museo_destroy', compact('museo'))}}" method="POST">
-                                @csrf
-                                @method("DELETE")
-                                <button type="submit"><i class="fa-regular fa-trash-can" style="color: #ff0000;"></i></button>
-                            </form>
-
+                            @if(Auth::id()==$museo->user->id)
+                                <form action="{{route('museo_destroy', compact('museo'))}}" method="POST">
+                                    @csrf
+                                    @method("DELETE")
+                                    <button type="submit"><i class="fa-regular fa-trash-can" style="color: #ff0000;"></i></button>
+                                </form>
+                            @endif
                         </div>
                 </div>
              </article>

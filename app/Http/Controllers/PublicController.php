@@ -124,5 +124,26 @@ class PublicController extends Controller
         return redirect(route("musei"));
     }
 
+    // Movie
+    public function showMovie(Movie $movie){
+        return view("movies.detail", compact("movie")); //compact() crea un array associativo usando i nomi delle variabili come chiavi per passarle (ad esempio alle view).
+    }
+    public function editMovie(Movie $movie){
+        return view("movies.edit", compact("movie"));
+    }
+    public function updateMovie(Request $request, Movie $movie){
+        $movie->update([
+            "title" => $request->title,
+            "director" => $request->director,
+            "year" => $request->year,
+            "info" => $request->info
+        ]);
+        return redirect(route("movie_show", compact("movie")));
+    }
+    public function destroyMovie(Movie $movie){
+        $movie->delete();
+        return redirect(route("movie"));
+    }
+
 
 }

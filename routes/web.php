@@ -6,13 +6,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PublicController::class, "home"])->name("home");
 Route::get("/nuovi_arrivi", [PublicController::class, "nuoviArrivi"])->name("new");
-Route::get("/libri", [PublicController::class, "libri"])->name("libri");
-Route::get("/libri/create-libri", [PublicController::class, "create_libri"])->name("create_libri");
-Route::post("/libro/add", [PublicController::class, "add_libro"])->name("add_libro");
+
+// Musei
 Route::get("/movies", [PublicController::class, "movies"])->name("movies");
 Route::get("/movies/create-movies", [PublicController::class, "create_movies"])->name("create_movies");
 Route::post("/movie/add", [PublicController::class, "add_movie"])->name("add_movie");
+Route::get("/movie/detail/{movie}", [PublicController::class, "showMovie"])->name("movie_show");
+Route::get("/movies/edit/{movie}", [PublicController::class, "editMovie"])->name("movie_edit");
+Route::put("/movie/update/{movie}", [PublicController::class, "updateMovie"])->name("movie_update");
+Route::delete("/movie/destroy/{movie}", [PublicController::class, "destroyMovie"])->name("movie_destroy");
 
+// Libri
+Route::get("/libri", [PublicController::class, "libri"])->name("libri");
+Route::get("/libri/create-libri", [PublicController::class, "create_libri"])->name("create_libri");
+Route::post("/libro/add", [PublicController::class, "add_libro"])->name("add_libro");
 Route::get("/libro/detail/{libro}", [PublicController::class, "show"])->name("libro_show");
 Route::get("/libri/edit/{libro}", [PublicController::class, "edit"])->name("libro_edit");
 Route::put("/libro/update/{libro}", [PublicController::class, "update"])->name("libro_update");
