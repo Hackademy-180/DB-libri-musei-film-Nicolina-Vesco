@@ -7,7 +7,7 @@
                     @method("put")
                     <div class="mb-3 mt-5">
                         <label for="title" class="form-label">Nuovo Titolo:</label>
-                        <input type="text" class="form-control" id="title" placeholder="" name="title" value="{{$libro->title}}">
+                        <input type="text" class="form-control" id="title" placeholder="" name="title" value="{{$libro->title)}}">
                     </div>
                     <div class="mb-3">
                         <label for="author" class="form-label">Nuovo Autore:</label>
@@ -22,7 +22,7 @@
                         <textarea name="info" class="form-control" id="info" rows="3">{{ $libro->info }}</textarea>
                     </div>
                     <div class="col-auto">
-                       <button type="submit" class="btn btn-primary mb-3">Modifica</button>
+                        <button type="submit" class="btn btn-primary mb-3">Modifica</button>
                     </div>
                 </form>
             </div>

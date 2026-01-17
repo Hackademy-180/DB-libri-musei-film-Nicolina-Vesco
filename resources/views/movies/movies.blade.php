@@ -4,9 +4,9 @@
             @foreach($movies as $movie)
                 <article class="col-12 col-md-3 mt-5">
                    <div class="card">
-                      <img src="https://picsum.photos/seed/museum/800/600" class="card-img-top" alt="foto random da picsum">
-                      <h5 class="card-title">{{$movie->title}}</h5>
-                        <div class="card-body d-flex align-items-center gap-3">
+                      <img src="{{Storage::url($movie->img)}}" class="card-img-top" alt="">
+                      <h5 class="card-title text-center mt-2">{{$movie->title}}</h5>
+                        <div class="card-body d-flex align-items-center gap-3 justify-content-center">
                             <a href="{{route('movie_show', compact('movie'))}}" class="btn btn-primary">Visualizza dettaglio</a>
                             @if(Auth::id()==$movie->user->id)
                                 <form action="{{route('movie_destroy', compact('movie'))}}" method="POST">

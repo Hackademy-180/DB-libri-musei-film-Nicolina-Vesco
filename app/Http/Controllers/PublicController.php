@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\LibriRequest;
+use App\Http\Requests\MoviesRequest;
+use App\Http\Requests\MuseiRequest;
 use App\Models\Libro;
 use App\Models\Museo;
 use App\Models\Movie;
@@ -33,27 +36,29 @@ class PublicController extends Controller
         return view("musei.create-musei");
     }
 
-    public function add_libro(Request $request){
+    public function add_libro(LibriRequest $request){
         Libro::create([
             "title" => $request->title,
             "author" => $request->author,
             "year" => $request->year,
             "info" => $request->info,
-            "user_id"=> Auth::user()->id
+            "user_id"=> Auth::user()->id,
+            "img" => $request->file("img") ? $request->file("img")->store("image", "public"): "media/default.png"
 
         ]);
-        return redirect(route("home"))->with("status", "Libro caricato correttamente!");
+        return redirect(route("libri"))->with("status", "Libro caricato correttamente!");
     }
-     public function add_museo(Request $request){
+     public function add_museo(MuseiRequest $request){
         Museo::create([
             "name" => $request->name,
             "country" => $request->country,
             "year" => $request->year,
             "info" => $request->info,
             "user_id"=> Auth::user()->id,
+            "img" => $request->file("img") ? $request->file("img")->store("image", "public"): "media/default.pmg"
 
         ]);
-        return redirect(route("home"))->with("status", "Museo aggiornato correttamente!");
+        return redirect(route("musei"))->with("status", "Museo aggiornato correttamente!");
     }
 
     public function movies(){
@@ -63,15 +68,16 @@ class PublicController extends Controller
     public function create_movies(){
         return view("movies.create-movies");
     }
-    public function add_movie(Request $request){
+    public function add_movie(MoviesRequest $request){
         Movie::create([
             "title" => $request->title,
             "director" => $request->director,
             "year" => $request->year,
             "info" => $request->info,
             "user_id"=> Auth::user()->id,
+            "img" => $request->file("img") ? $request->file("img")->store("image", "public"): "media/default.png"
         ]);
-        return redirect(route("home"))->with("status", "Film caricato correttamente!");
+        return redirect(route("movies"))->with("status", "Film caricato correttamente!");
     }
     public function show(Libro $libro){ 
         //Pagina di dettaglio

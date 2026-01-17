@@ -4,9 +4,9 @@
             @foreach($libri as $libro)
             <article class="col-12 col-md-3 mt-5">
                 <div class="card">
-                    <img src="https://www.ibs.it/assets/2024/04/20240415084403-copieautografatevintageslideshowmob-.webp" class="card-img-top" alt="foto random da picsum">
-                    <h5 class="card-title">{{$libro->title}}</h5>
-                    <div class="card-body d-flex align-items-center gap-3">
+                    <img src="{{Storage::url($libro->img)}}" class="card-img-top" alt="foto random da picsum">
+                    <h5 class="card-title text-center mt-2">{{$libro->title}}</h5>
+                    <div class="card-body d-flex align-items-center gap-3 justify-content-center">
                         <a href="{{route('libro_show', compact('libro'))}}" class="btn btn-primary">Visualizza dettaglio</a>
                             @if(Auth::id()==$libro->user->id)
                                 <form action="{{route('libro_destroy', compact('libro'))}}" method="POST">
